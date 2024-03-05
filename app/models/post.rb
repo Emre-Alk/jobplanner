@@ -6,6 +6,6 @@ class Post < ApplicationRecord
   enum status: {
     pending: 0,
     applied: 10,
-    rejected: 30,
+    rejected: 30
   }
 end

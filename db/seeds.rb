@@ -10,6 +10,7 @@
 
 require 'open-uri'
 require 'faker'
+PostStack.destroy_all
 Post.destroy_all
 Company.destroy_all
 User.destroy_all
@@ -17,41 +18,51 @@ Stack.destroy_all
 
 puts "Destroy all posts, users, stacks, companies"
 
-20.times do
-  user_email = Faker::Internet.email(domain: 'gmail.com')
-  user_password = Faker::Internet.password(min_length: 3)
+user = User.create!(
+  email: 'a@a.com',
+  password: '123456',
+  token: 'token'
+)
+puts "#{user.email} - #{user.password} "
+
+50.times do
   faker_company = Faker::Company.name
-  faker_stack = Faker::ProgrammingLanguage.name
-  faker_date = Faker::Date.between(from: 15.days.ago, to: Date.today)
   faker_location = Faker::Address.city
-  # url_id = rand(10..40)
-  # if Rails.env.production?
-  #   picture_url = "https://res.cloudinary.com/dnnoyjw9r/image/upload/v1709290819/development/#{id}.jpg"
-  # else
-  #   picture_url = "https://res.cloudinary.com/dnnoyjw9r/image/upload/v1709219056/development/w86488ztyx76exe4tjvkzy66o9v1.jpg"
-  # end
-  # picture = URI.open(picture_url)
+  faker_title = Faker::Job.title
+  logo = "https://media.licdn.com/dms/image/C560BAQEbIYAkAURcYw/company-logo_100_100/0/1650566107463/canonical_logo?e=1717632000&v=beta&t=Iw7KBd9gVHxKGYMsE5DFmcCSzazrARLeeXPJomYeqmA"
+  faker_date = Faker::Date.between(from: 15.days.ago, to: Date.today)
+  faker_contract_type = Faker::Job.employment_type
+  faker_stack = Faker::ProgrammingLanguage.name
 
-  user = User.new(
-    email: user_email,
-    password: user_password,
-  )
-
-  user.save!
-  puts "#{user.email} - #{user.password} created"
-
-  company = Company.new(
-    name: faker_company
-  )
+  company = Company.new(name: faker_company, logo_url: logo)
+  p company
+  company.save!
 
   post = Post.new(
-    company: company.id,
+    title: faker_title,
     location: faker_location,
-    date: faker_date,
-    stack: faker_stack
-
+    contract_type: faker_contract_type,
+    published_on: faker_date,
+    url: "https://www.linkedin.com/jobs/search/?currentJobId=2948680713&keywords=web%20developer&origin=BLENDED_SEARCH_RESULT_NAVIGATION_JOB_CARD",
+    description: "lorem ipsum",
+    experience_years: rand(0..4).to_i,
+    status: [0, 10, 30].sample.to_i
   )
+  post.user = user
+  post.company = company
   post.save!
 
+  stack = Stack.new(
+    name: faker_stack
+  )
+  stack.save!
+
+  post_stack = PostStack.new
+  post_stack.post = post
+  post_stack.stack = stack
+
+  post_stack.save!
+
 end
+
 puts "seed ok"
