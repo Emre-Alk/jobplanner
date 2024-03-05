@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
 
   enum status: {
-    candidate: 0,
-    candidated: 1,
+    pending: 0,
+    applied: 10,
+    rejected: 30,
   }
-
 end
