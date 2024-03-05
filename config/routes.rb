@@ -3,5 +3,10 @@ Rails.application.routes.draw do
 
   root to: "posts#index"
 
-  resources :posts, only: %i[index show create edit update]
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :posts, only: %i[create]
+    end
+  end
+  resources :posts, only: %i[index show edit update]
 end
