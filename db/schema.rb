@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_105037) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_154954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,8 +44,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_105037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.bigint "company_id", null: false
+    t.bigint "company_id"
+    t.bigint "scraper_id", null: false
     t.index ["company_id"], name: "index_posts_on_company_id"
+    t.index ["scraper_id"], name: "index_posts_on_scraper_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -53,6 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_105037) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "scrap_status", default: 0, null: false
   end
 
   create_table "stacks", force: :cascade do |t|
@@ -70,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_105037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token", null: false
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -77,5 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_105037) do
   add_foreign_key "post_stacks", "posts"
   add_foreign_key "post_stacks", "stacks"
   add_foreign_key "posts", "companies"
+  add_foreign_key "posts", "scrapers"
   add_foreign_key "posts", "users"
 end

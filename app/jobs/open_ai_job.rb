@@ -1,39 +1,52 @@
 class OpenAiJob < ApplicationJob
   queue_as :default
 
-  def perform(prompt_content)
-    OpenAI.configure do |config|
-      config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
+  def perform(post_id)
+    post = Post.find(post_id)
+    return unless post
+
+    post.scrap.update(scrap_status: 10)
+
+    response = OpenAiService.new(post).call
+    return unless response
+
+    post.scrap.update(scrap_status: 30)
+    parsed_response = JSON.parse(response)
+
+    company = Company.find_or_create_by(name: parsed_response[:company_name])
+
+    techno = parsed_response[:programming_language_stack]
+    techno_downcase = techno.map do |tech|
+      tech.downcase
     end
 
-    extraction_fields = ["title", "location", "contract_type", "published_on", "description", "experience_years", "company_name", "programming_language_stack"]
+    techno_downcase.each do |tech|
+      stack = Stack.find_or_create_by(name: tech)
+      PostStack.create(post: post, stack: stack)
+    end
 
-    scrape_attempt = '{
-      "title": "title",
-      "location": "location",
-      "contract_type": "contract_type",
-      "published_on": "published_on",
-      "description": "description",
-      "experience_years": "experience_years",
-      "company_name": "company_name",
-      "programming_language_stack": "programming_language_stack"
-    }'
+    parsed_response.delete(:company_name)
+    parsed_response.delete(:programming_language_stack)
 
-    prompt_parser = "Using only the information provided in the following raw text, extract the fields #{extraction_fields.join(',')}.
-    If a specific field is not found in the text, mark its value as 'Not Available'.
-    Do not make assumptions or add information not present in the text. Format the output as a JSON:
-    Raw text: #{scrape_attempt}"
+    post.update(parsed_response)
+    post.company = company
 
-    prompt = prompt_content + prompt_parser
+    if post.save
+      render_ok
+    else
+      render_error
+    end
 
-    client = OpenAI::Client.new
+    # Broadcast to the posts index
+  end
 
-    response = client.chat(
-        parameters: {
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: prompt}],
-            temperature: 0.7,
-        })
-    puts response.dig("choices", 0, "message", "content")
+  private
+
+  def render_error
+    render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def render_ok
+    render json: { message: "created" }, status: '201'
   end
 end
