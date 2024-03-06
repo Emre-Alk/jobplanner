@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
-  has_many :post_stacks
   belongs_to :company, optional: true
+  has_many :stacks, through: :post_stacks
   belongs_to :user
   belongs_to :scraper
 
