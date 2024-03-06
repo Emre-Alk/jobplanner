@@ -3,27 +3,38 @@ class Api::V1::PostsController < Api::V1::BaseController
   before_action :verfiy_auth_token
 
   def create
-    puts "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
-    p params
+    content = params[:content] #recup depuis l'extension
 
-    @post = Post.new(post_params)
+    #recup depuis chatgpt
+    response = {
+      title: "ingenieur",
+      comment: "done",
+      company_name: "edf"
+    }
+
+    @company = Company.find_or_create_by(name: response[:company_name])
+
+    response.delete(:company_name) #retirer company du retour chatgpt afin d'utiliser response solo pour créer post
+    @post = Post.new(response)
     @post.user = @user
-    @company = Company.new(name: "framatome")
     @post.company = @company
 
-    if post.save
+
+    if @post.save
       # QueryAiJob.perform_later # cours de demain
-      puts 'ok'
-      render json: { status: 200, message: 'ok' }
+      render_ok
     else
-      puts 'nok'
-      render json: { status: 422, message: post.errors.full_messages.to_sentence }
+      render_error
     end
   end
 
   private
 
-  def post_params
-    params.require(:post).permit(:content, :token)
+  def render_error
+    render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def render_ok
+    render json: { message: "created" }, status: '201'
   end
 end
