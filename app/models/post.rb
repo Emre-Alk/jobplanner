@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
-  has_many :post_stacks
+  belongs_to :company, optional: true
   has_many :stacks, through: :post_stacks
-  belongs_to :company
   belongs_to :user
+  belongs_to :scraper
+
 
   enum status: {
     pending: 0,
