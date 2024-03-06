@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_06_154954) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_172358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,9 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_154954) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "company_id"
-    t.bigint "scraper_id", null: false
+    t.integer "scrap_status", default: 0, null: false
     t.index ["company_id"], name: "index_posts_on_company_id"
-    t.index ["scraper_id"], name: "index_posts_on_scraper_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -81,6 +80,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_154954) do
   add_foreign_key "post_stacks", "posts"
   add_foreign_key "post_stacks", "stacks"
   add_foreign_key "posts", "companies"
-  add_foreign_key "posts", "scrapers"
   add_foreign_key "posts", "users"
 end

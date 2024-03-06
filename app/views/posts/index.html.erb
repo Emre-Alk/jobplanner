@@ -47,10 +47,10 @@
                                     </div>
                                   <% end %>
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company.name %></th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name %></th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.location %></th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.contract_type %></th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.published_on.strftime("%Y-%m-%d") %></th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.published_on&.strftime("%Y-%m-%d") %></th>
                                 <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                                     <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"><%= post.status %></span></td>
                             </tr>
@@ -84,4 +84,3 @@
         </div>
     </div>
 </div>
-

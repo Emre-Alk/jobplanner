@@ -1,19 +1,14 @@
 class OpenAiService
-  attr_reader :post
+  attr_reader :post, :client, :content
 
   def initialize(post)
     @post = post
-
+    @content = post.html_source
+    @client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_ACCESS_TOKEN"))
   end
 
   def call
     begin
-      prompt_content = post.scraper.content
-      OpenAI.configure do |config|
-        config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
-      end
-      client = OpenAI::Client.new
-
       extraction_fields = ["title", "location", "contract_type", "published_on", "description", "experience_years", "company_name", "programming_language_stack"]
 
       scrape_attempt = '{
@@ -32,7 +27,7 @@ class OpenAiService
       Do not make assumptions or add information not present in the text. Format the output as a JSON:
       Raw text: #{scrape_attempt}"
 
-      prompt = prompt_content + prompt_parser
+      prompt = content + prompt_parser
 
       response = client.chat(
           parameters: {
@@ -41,8 +36,9 @@ class OpenAiService
               temperature: 0.7,
           })
       return response.dig("choices", 0, "message", "content")
-    rescue
-      post.scraper.update(scrap_status: 20)
+    rescue => e
+      p e
+      post.update(scrap_status: 20)
       nil
     end
   end
