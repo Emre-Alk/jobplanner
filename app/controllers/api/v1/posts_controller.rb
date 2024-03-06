@@ -7,7 +7,7 @@ class Api::V1::PostsController < Api::V1::BaseController
     url = params[:url] #recup depuis l'extension
     scrap = Scraper.new
     post = Post.create(url: url, scraper: scrap, user: @user) #creer le post avec url only et assignation current user
-    OpenAiJob.perfom_later(post.id)
+    OpenAiJob.perform_later(post.id)
 
     # #recup depuis chatgpt fake
     # response = {

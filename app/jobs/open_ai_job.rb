@@ -5,12 +5,12 @@ class OpenAiJob < ApplicationJob
     post = Post.find(post_id)
     return unless post
 
-    post.scrap.update(scrap_status: 10)
+    post.scraper.update(scrap_status: 10)
 
     response = OpenAiService.new(post).call
     return unless response
 
-    post.scrap.update(scrap_status: 30)
+    post.scraper.update(scrap_status: 30)
     parsed_response = JSON.parse(response)
 
     company = Company.find_or_create_by(name: parsed_response[:company_name])

@@ -1,17 +1,18 @@
 class OpenAiService
-  attr_reader :post, :client
+  attr_reader :post
 
   def initialize(post)
     @post = post
-    @client = OpenAI::Client.new
+
   end
 
   def call
     begin
-      prompt_content = post.scrap.content
+      prompt_content = post.scraper.content
       OpenAI.configure do |config|
         config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
       end
+      client = OpenAI::Client.new
 
       extraction_fields = ["title", "location", "contract_type", "published_on", "description", "experience_years", "company_name", "programming_language_stack"]
 
@@ -41,7 +42,7 @@ class OpenAiService
           })
       return response.dig("choices", 0, "message", "content")
     rescue
-      post.scrap.update(scrap_status: 20)
+      post.scraper.update(scrap_status: 20)
       nil
     end
   end
