@@ -8,9 +8,9 @@ class Api::V1::PostsController < Api::V1::BaseController
     post = Post.new(url: url, scrap_status: 'initializing', user: @user, html_source: content) #creer le post avec url only et assignation current user
     if post.save
       OpenAiJob.perform_later(post.id)
-      render json: { status: 201, message: 'created' }
+      render json: { message: 'created' }, status: 201
     else
-      render json: { status: 422, message: 'Unprocessable Entity' }
+      render json: { message: 'Unprocessable Entity' }, status: 422
     end
   end
 end
