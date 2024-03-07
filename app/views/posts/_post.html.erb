@@ -1,0 +1,32 @@
+
+<tr id="<%= post.id %>">
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+      <div data-controller="modal">
+        <button data-action="modal#open" class="btn-outline"><%= post.title %></button>
+          <dialog data-modal-target="modal">
+            <%= render "posts/show", post: post %>
+          </dialog>
+      </div>
+  </th>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
+    <% post.stacks.each do |stack| %>
+      <div class="flex gap-1">
+        <i class=" text-xl devicon-<%= stack.name %>-plain colored"></i>
+        <%#= stack.name %>
+      </div>
+    <% end %>
+  </th>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name %></th>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.location %></th>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.contract_type %></th>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.published_on&.strftime("%Y-%m-%d") %></th>
+  <td class="whitespace-nowrap px-3 py-1 text-sm text-500">
+    <% if post.status == "applied" %>
+      <span class="inline-flex items-center rounded-md bg-green-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-green-600/20"><%= post.status %></span>
+    <% elsif post.status == "rejected" %>
+      <span class="inline-flex items-center rounded-md bg-red-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-red-600/20"><%= post.status %></span>
+    <% else %>
+      <span class="inline-flex items-center rounded-md bg-yellow-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-yellow-600/20"><%= post.status %></span>
+    <% end %>
+  </td>
+</tr>
