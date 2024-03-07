@@ -1,3 +1,11 @@
+<div data-controller="modal">
+                <button data-action="modal#open" class="btn-outline">Details</button>
+                  <dialog data-modal-target="modal">
+                    <%= render "show", post: @post %>
+                  </dialog>
+              </div>
+
+
 <div class="max-w-screen-lg mx-auto mt-8 rounded-md">
   <button type="button" data-action="modal#close" class="absolute top-4 right-4">X</button>
     <div class="w-full p-4 rounded-md">
