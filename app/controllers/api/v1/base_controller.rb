@@ -5,7 +5,7 @@ class Api::V1::BaseController < ActionController::API
   def verfiy_auth_token
     @user = User.find_by(token: params[:token])
     if @user.nil?
-      render json: { status: 401, message: 'unauthorized: unknown user' }
+      render json: { message: 'unauthorized: unknown user' }, status: 401
     end
   end
 end

@@ -38,7 +38,14 @@
                         <thead>
                           <% @posts.each do |post| %>
                             <tr>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"><%= post.title %></th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                   <div data-controller="modal">
+                                      <button data-action="modal#open" class="btn-outline"><%= post.title %></button>
+                                        <dialog data-modal-target="modal">
+                                          <%= render "show", post: post %>
+                                        </dialog>
+                                    </div>
+                                </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
                                   <% post.stacks.each do |stack| %>
                                     <div class="flex gap-1">
@@ -86,6 +93,7 @@
                             <!-- More people... -->
                         </tbody> %>
                     </table>
+
                 </div>
             </div>
         </div>
