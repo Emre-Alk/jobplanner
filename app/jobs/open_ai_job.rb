@@ -1,39 +1,41 @@
 class OpenAiJob < ApplicationJob
   queue_as :default
 
-  def perform(prompt_content)
-    OpenAI.configure do |config|
-      config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
+  def perform(post_id)
+    post = Post.find(post_id)
+    return unless post
+
+    post.update!(scrap_status: 10)
+
+    response = OpenAiService.new(post).call
+    return unless response
+
+
+    post.update(scrap_status: 'successful')
+    parsed_response = JSON.parse(response)&.symbolize_keys
+    return unless parsed_response
+    puts "✅✅✅✅✅✅✅✅✅✅"
+    p parsed_response
+    puts "✅✅✅✅✅✅✅✅✅✅"
+
+    company = Company.find_or_create_by(name: parsed_response[:company_name])
+
+    techno = parsed_response[:programming_language_stack]
+    if techno
+      techno_downcase = techno.map(&:downcase)
+      techno_downcase.each do |tech|
+        stack = Stack.find_or_create_by(name: tech)
+        PostStack.create(post: post, stack: stack)
+      end
     end
 
-    extraction_fields = ["title", "location", "contract_type", "published_on", "description", "experience_years", "company_name", "programming_language_stack"]
 
-    scrape_attempt = '{
-      "title": "title",
-      "location": "location",
-      "contract_type": "contract_type",
-      "published_on": "published_on",
-      "description": "description",
-      "experience_years": "experience_years",
-      "company_name": "company_name",
-      "programming_language_stack": "programming_language_stack"
-    }'
+    parsed_response.delete(:company_name) if parsed_response[:company_name]
+    parsed_response.delete(:programming_language_stack) if parsed_response[:programming_language_stack]
 
-    prompt_parser = "Using only the information provided in the following raw text, extract the fields #{extraction_fields.join(',')}.
-    If a specific field is not found in the text, mark its value as 'Not Available'.
-    Do not make assumptions or add information not present in the text. Format the output as a JSON:
-    Raw text: #{scrape_attempt}"
+    post.update(parsed_response)
+    post.company = company if company
 
-    prompt = prompt_content + prompt_parser
-
-    client = OpenAI::Client.new
-
-    response = client.chat(
-        parameters: {
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: prompt}],
-            temperature: 0.7,
-        })
-    puts response.dig("choices", 0, "message", "content")
+    # Broadcast to the posts index
   end
 end

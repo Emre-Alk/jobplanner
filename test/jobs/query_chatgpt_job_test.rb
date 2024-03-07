@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ScraperTest < ActiveSupport::TestCase
+class QueryChatgptJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end
