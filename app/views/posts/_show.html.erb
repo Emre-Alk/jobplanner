@@ -1,24 +1,26 @@
-<div data-controller="modal">
-                <button data-action="modal#open" class="btn-outline">Details</button>
-                  <dialog data-modal-target="modal">
-                    <%= render "show", post: @post %>
-                  </dialog>
-              </div>
+
 
 
 <div class="max-w-screen-lg mx-auto mt-8 rounded-md">
   <button type="button" data-action="modal#close" class="absolute top-4 right-4">X</button>
     <div class="w-full p-4 rounded-md">
-      <img src="image.jpg" alt="image" class="w-full h-auto rounded-md">
-      <h1 class="text-2xl font-bold mb-2">Développeur full-stack</h1>
-      <p class="text-gray-600 mb-2"><i>Il y a 1 jour</i></p>
+      <%# <img src="image.jpg" alt="image" class="w-full h-auto rounded-md"> %>
+      <h1 class="text-2xl font-bold mb-2"><%= post.title %></h1>
+      <p class="text-gray-600 mb-2"><i><%= post.published_on %></i></p>
       <div class="mb-4">
-        <p class="text-gray-700 mb-1"><strong>Company:</strong> Seven</p>
-        <p class="text-gray-700 mb-1"><strong>Stack:</strong> Ruby</p>
-        <p class="text-gray-700 mb-1"><strong>Contract_type:</strong> CDD</p>
-        <p class="text-gray-700 mb-1"><strong>Url:</strong> .com</p>
-        <p class="text-gray-700 mb-1"><strong>Experience years:</strong>6</p>
-        <p class="text-gray-700 mb-1"><strong>Location:</strong> Paris</p>
+        <p class="text-gray-700 mb-1"><strong>Company: </strong><%= post.company&.name %></p>
+        <p class="text-gray-700 mb-1"><strong>Stack:<strong>
+          <% post.stacks.each do |stack| %>
+            <div class="flex gap-1">
+              <i class=" text-xl devicon-<%= stack.name %>-plain colored"></i>
+              <%= stack.name %>
+            </div>
+          <% end %>
+        </p>
+        <p class="text-gray-700 mb-1"><strong>Location: </strong><%= post.location %></p>
+        <p class="text-gray-700 mb-1"><strong>Contract type: </strong><%= post.contract_type %></p>
+        <p class="text-gray-700 mb-1"><strong>Experience years: </strong><%= post.experience_years %></p>
+        <p class="text-gray-700 mb-1"><strong>Adresse url: </strong><%= post.url %></p>
       </div>
       <div class="text-gray-800">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum...Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
