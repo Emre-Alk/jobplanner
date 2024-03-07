@@ -38,7 +38,11 @@
                         <thead>
                           <% @posts.each do |post| %>
                             <tr>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"><%= post.title %></th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                  <button data-action="modal#open" data-target="modal">
+                                    <%= post.title %>
+                                  </button>
+                                </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
                                   <% post.stacks.each do |stack| %>
                                     <div class="flex gap-1">
