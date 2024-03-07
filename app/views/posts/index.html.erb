@@ -6,11 +6,12 @@
                 <%#= link_to "add post", new_posts_path,class:"block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
             </div>
         </div>
-        <div class="mt-8">
-            <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-                <div class="min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <table class=" relative min-w-full divide-y divide-gray-300">
-                        <thead class="">
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user.id %>">
+                        <thead>
+
                             <tr class="bg-gray-800">
                                 <th scope="col" class="bg-gray-800 sticky top-0 px-3 py-3.5 text-left text-sm font-semibold text-white">Title</th>
                                 <th scope="col" class="bg-gray-800 sticky top-0 px-3 py-3.5 text-left text-sm font-semibold text-white">Stack</th>
@@ -21,41 +22,11 @@
                                 <th scope="col" class="bg-gray-800 sticky top-0 px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
                             </tr>
                         </thead>
-                        <thead>
+                        <tbody data-tablepost-subscription-target="insert">
                           <% @posts.each do |post| %>
-                            <tr>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                   <div data-controller="modal">
-                                      <button data-action="modal#open" class="btn-outline"><%= post.title %></button>
-                                        <dialog data-modal-target="modal">
-                                          <%= render "show", post: post %>
-                                        </dialog>
-                                    </div>
-                                </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
-                                  <% post.stacks.each do |stack| %>
-                                    <div class="flex gap-1">
-                                      <i class=" text-xl devicon-<%= stack.name %>-plain colored"></i>
-                                      <%= stack.name %>
-                                    </div>
-                                  <% end %>
-                                </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name %></th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.location %></th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.contract_type %></th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.published_on&.strftime("%Y-%m-%d") %></th>
-                                <td class="whitespace-nowrap px-3 py-1 text-sm text-500">
-                                  <% if post.status == "applied" %>
-                                    <span class="inline-flex items-center rounded-md bg-green-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-green-600/20"><%= post.status %></span>
-                                  <% elsif post.status == "rejected" %>
-                                    <span class="inline-flex items-center rounded-md bg-red-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-red-600/20"><%= post.status %></span>
-                                  <% else %>
-                                    <span class="inline-flex items-center rounded-md bg-yellow-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-yellow-600/20"><%= post.status %></span>
-                                  <% end %>
-                          </td>
-                            </tr>
+                            <%= render post %>
                           <% end %>
-                        </thead>
+                        </tbody>
                         <%# <tbody class="divide-y divide-gray-200 bg-white">
                             <tr>
                                 <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
