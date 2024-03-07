@@ -1,7 +1,7 @@
 class OpenAiJob < ApplicationJob
   queue_as :default
 
-  def perform(post_id)
+  def perform(post_id, user)
     post = Post.find(post_id)
     return unless post
 
@@ -9,7 +9,6 @@ class OpenAiJob < ApplicationJob
 
     response = OpenAiService.new(post).call
     return unless response
-
 
     post.update(scrap_status: 'successful')
     parsed_response = JSON.parse(response)&.symbolize_keys
@@ -29,12 +28,17 @@ class OpenAiJob < ApplicationJob
       end
     end
 
-
     parsed_response.delete(:company_name) if parsed_response[:company_name]
     parsed_response.delete(:programming_language_stack) if parsed_response[:programming_language_stack]
 
     post.update(parsed_response)
     post.company = company if company
+
+    TablepostChannel.broadcast_to(
+      user,
+      post
+    )
+
 
     # Broadcast to the posts index
   end
