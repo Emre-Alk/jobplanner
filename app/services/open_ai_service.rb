@@ -38,7 +38,7 @@ class OpenAiService
       return response.dig("choices", 0, "message", "content")
     rescue => e
       p e
-      post.update(scrap_status: 20)
+      post.update(scrap_status: 'failed')
       nil
     end
   end

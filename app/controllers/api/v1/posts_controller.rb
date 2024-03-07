@@ -8,18 +8,9 @@ class Api::V1::PostsController < Api::V1::BaseController
     post = Post.new(url: url, scrap_status: 'initializing', user: @user, html_source: content) #creer le post avec url only et assignation current user
     if post.save
       OpenAiJob.perform_later(post.id)
-      render json: {status: 201, message: 'cool'}
+      render json: { status: 201, message: 'created' }
     else
-      render json: {status: 422, message: 'pas cool'}
+      render json: { status: 422, message: 'Unprocessable Entity' }
     end
-
-
-    # #recup depuis chatgpt fake
-    # response = {
-    #   title: "ingenieur",
-    #   comment: "done",
-    #   company_name: "edf"
-    # }
-
   end
 end

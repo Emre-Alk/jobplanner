@@ -11,7 +11,7 @@ class OpenAiJob < ApplicationJob
     return unless response
 
 
-    post.update(scrap_status: 30)
+    post.update(scrap_status: 'successful')
     parsed_response = JSON.parse(response)&.symbolize_keys
     return unless parsed_response
     puts "✅✅✅✅✅✅✅✅✅✅"
