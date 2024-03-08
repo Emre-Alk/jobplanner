@@ -17,9 +17,12 @@
                             </tr>
                         </thead>
                         <tbody data-tablepost-subscription-target="insert">
-                          <% @posts.each do |post| %>
-                            <%= render post %>
-                          <% end %>
+
+                            <% @posts.each do |post| %>
+                                <tr class="border-b border-gray-300">
+                                    <%= render post %>
+                                </tr>
+                            <% end %>
                         </tbody>
                     </table>
                 </div>
