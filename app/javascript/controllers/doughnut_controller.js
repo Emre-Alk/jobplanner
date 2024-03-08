@@ -32,7 +32,11 @@ export default class extends Controller {
       plugins: {
         legend: {
           position: 'right' // This positions the legend at the bottom
-        }
+        },
+        // title: {
+        //   display: true,
+        //   text: 'Job applications status'
+        // }
       }
     };
 

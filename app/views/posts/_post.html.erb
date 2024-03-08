@@ -9,14 +9,14 @@
       </div>
   </th>
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
-    <% post.stacks.each do |stack| %>
-      <div class="flex gap-1">
-        <i class=" text-xl devicon-<%= stack.name %>-plain colored"></i>
-        <%= stack.name %>
-      </div>
+    <div class="flex gap-1">
+      <% post.stacks.each do |stack| %>
+        <i class="text-3xl devicon-<%= stack.name %>-plain colored"></i>
+        <%#= stack.name %>
     <% end %>
+    </div>
   </th>
-  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name %></th>
+  <%# <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name</th> %>
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.location %></th>
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.contract_type %></th>
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.published_on&.strftime("%Y-%m-%d") %></th>
