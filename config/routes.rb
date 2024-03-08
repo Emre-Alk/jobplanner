@@ -13,5 +13,9 @@ Rails.application.routes.draw do
       resources :posts, only: %i[create]
     end
   end
-  resources :posts, only: %i[index show edit update]
+  resources :posts, only: %i[index show edit update] do
+    member do
+      get :render_post_partial
+    end
+  end
 end
