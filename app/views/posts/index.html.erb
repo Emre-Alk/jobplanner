@@ -1,5 +1,6 @@
 <div class="bg-gray-100">
     <%= render partial: 'components/stats' %>
+
     <div class="h-24">
     </div>
     <div class="w-full">
@@ -7,6 +8,7 @@
             <div class="overflow-x-auto">
                 <div class="inline-block min-w-full py-2 align-middle">
                     <table class="min-w-full divide-y divide-gray-300 " data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user.id %>">
+
                         <thead>
                             <tr class="bg-gray-800">
                                 <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Title</th>

@@ -14,6 +14,13 @@
  *= require_self
  */
 
+
+.bullet-point::before {
+   content: '\2022'; /* Code du caractère point (bullet) */
+   color: #4a5568; /* Couleur du point */
+   margin-right: 8px; /* Marge à droite du point pour l'espacement */
+ }
+
  .lilita-one-regular {
   font-family: "Lilita One", sans-serif;
   font-weight: 400;
@@ -23,3 +30,4 @@
   background-clip: text;
   color: transparent;
 }
+
