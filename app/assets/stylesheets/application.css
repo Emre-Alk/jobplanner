@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+ .bullet-point::before {
+   content: '\2022'; /* Code du caractère point (bullet) */
+   color: #4a5568; /* Couleur du point */
+   margin-right: 8px; /* Marge à droite du point pour l'espacement */
+ }
+
+ .rounded-very-lg {
+  border-radius: 27px; /* Ajustez la valeur selon vos préférences */
+  }

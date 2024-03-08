@@ -4,7 +4,7 @@
         <div class="mt-8 flow-root">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <table class="min-w-full divide-y divide-gray-300" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user.id %>">
+                    <table class="min-w-full divide-y divide-gray-300" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user&.id %>">
                         <thead>
                             <tr class="bg-gray-800">
                                 <th scope="col" class="bg-gray-800 sticky top-0 px-3 py-3.5 text-left text-sm font-semibold text-white">Title</th>
