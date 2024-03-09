@@ -1,17 +1,19 @@
-<div class="h-64 w-full">
-  <div class="mx-16 shadow-md rounded-3xl bg-white">
-    <%# <h2  class="px-8">Hello</h2> %>
-    <div class="flex items-center justify-between gap-4">
-    <div class="col-span-2 px-4 sm:px-6">
-      <p class="text-3xl font-medium text-black">12 applications submitted</p>
-      <p class="text-2xl font-medium text-black">25 offers saved</p>
+<div class="shadow-md rounded-3xl bg-white ">
+  <%# <h2  class="px-8">Hello</h2> %>
+  <div class="flex gap-4 h-64 relative flex items-center justify-center">
+    <div class="w-1/4 p-4">
+      <p class="text-xl xl:text-3xl font-medium text-black">12 applications submitted</p>
+      <p class="text-lg xl:text-2xl font-medium text-black">25 offers saved</p>
     </div>
-    <div class="col-span-4 px-4 sm:px-6">
-      <%= render partial: 'components/line' %>
+    <div class="w-1/2 p-4 h-5/6 relative flex items-center justify-center">
+      <div data-controller="line" class="h-full w-full absolute flex items-center justify-center">
+        <canvas data-line-target="line" id="line_chart" ></canvas>
+      </div>
     </div>
-    <div class="col-span-2 px-4 sm:px-6">
-      <%= render partial: 'components/doughnut' %>
-    </div>
+    <div class="w-1/4 p-4 h-64 relative flex items-center justify-center">
+      <div data-controller="doughnut" class="h-full w-full absolute flex items-center justify-center">
+        <canvas data-doughnut-target="donut" id="donut_chart"></canvas>
+      </div>
     </div>
   </div>
 </div>

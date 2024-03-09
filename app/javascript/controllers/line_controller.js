@@ -24,7 +24,9 @@ export default class extends Controller {
         legend: {
           position: 'right' // This positions the legend at the bottom
         }
-      }
+      },
+      maintainAspectRatio: false,
+      responsive: true,
     };
 
     new Chart(this.lineTarget, {
