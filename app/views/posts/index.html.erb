@@ -1,7 +1,8 @@
-<div class="grid grid-col-1 gap-y-16 mx-16">
+<div class="grid grid-cols-1 gap-y-16 mx-16">
   <%= render partial: 'components/stats' %>
   <div class="rounded-3xl shadow-lg bg-white p-4">
-    <table class="min-w-full divide-y divide-gray-300 " data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user&.id %>">
+    <div class="overflow-x-auto whitespace-nowrap">
+      <table class="divide-y divide-gray-300 w-full table-auto" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user&.id %>">
       <thead>
           <tr class="bg-gray-800">
               <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Title</th>
@@ -19,5 +20,6 @@
         <% end %>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
