@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-
   root to: "posts#index"
 
   namespace :api, defaults: { format: :json } do
@@ -13,7 +12,7 @@ Rails.application.routes.draw do
       resources :posts, only: %i[create]
     end
   end
-  resources :posts, only: %i[index show edit update] do
+  resources :posts, only: %i[index show edit update destroy] do
     member do
       get :render_post_partial
     end

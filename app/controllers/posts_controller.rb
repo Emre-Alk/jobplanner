@@ -31,13 +31,22 @@ class PostsController < ApplicationController
       }
     )
   end
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      redirect_to posts_url, notice: "Post was successfully destroyed."
+    else
+      # Handle error
+    end
+  end
 
   private
 
   def set_posts_per_day(posts)
+    posts = posts.where(status: 'applied')
     posts_per_day = {}
     posts.each do |post|
-      date = post.created_at.strftime("%Y-%m-%d")
+      date = post.updated_at.strftime("%Y-%m-%d")
       if posts_per_day[date]
         posts_per_day[date] += 1
       else
