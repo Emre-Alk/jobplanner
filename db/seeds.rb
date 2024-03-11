@@ -47,7 +47,7 @@ puts "#{user.email} - #{user.password} "
     description: "lorem ipsum",
     experience_years: rand(0..4).to_i,
     status: [0, 10, 30].sample.to_i,
-    created_at: faker_date
+    updated_at: faker_date
   )
   post.user = user
   post.company = company
