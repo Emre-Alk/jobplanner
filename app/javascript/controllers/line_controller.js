@@ -5,16 +5,24 @@ Chart.register(...registerables);
 // Connects to data-controller="chart"
 export default class extends Controller {
   static targets = ["line"]
+  static values = {
+    data: Object
+  }
 
   connect() {
+    console.log("connected");
+    console.log(this.dataValue);
+
+    const sortedKeys = Object.keys(this.dataValue).sort((a, b) => new Date(a) - new Date(b));
+    const sortedValues = sortedKeys.map(key => this.dataValue[key]);
 
     const data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: sortedKeys,
       datasets: [{
         label: 'Applied',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: sortedValues,
         fill: false,
-        borderColor: 'rgb(54, 162, 235)',
+        borderColor: '#38a169',
         tension: 0.1
       }]
     };

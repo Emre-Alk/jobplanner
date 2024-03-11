@@ -6,13 +6,13 @@
       <p class="text-lg xl:text-2xl font-medium text-black">25 offers saved</p>
     </div>
     <div class="w-1/2 p-4 h-5/6 relative flex items-center justify-center">
-      <div data-controller="line" class="h-full w-full absolute flex items-center justify-center">
-        <canvas data-line-target="line" id="line_chart" ></canvas>
+      <div class="h-full w-full absolute flex items-center justify-center">
+        <canvas data-controller="line" data-line-data-value = "<%= posts_per_day.to_json %>" data-line-target="line" id="line_chart" ></canvas>
       </div>
     </div>
     <div class="w-1/4 p-4 h-64 relative flex items-center justify-center">
-      <div data-controller="doughnut" class="h-full w-full absolute flex items-center justify-center">
-        <canvas data-doughnut-target="donut" id="donut_chart"></canvas>
+      <div class="h-full w-full absolute flex items-center justify-center">
+        <canvas data-controller="doughnut" data-doughnut-data-value = "<%= status_frequency.to_json %>" data-doughnut-target="donut" id="donut_chart"></canvas>
       </div>
     </div>
   </div>

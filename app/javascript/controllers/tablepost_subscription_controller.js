@@ -9,8 +9,6 @@ export default class extends Controller {
   static targets = ["insert"]
 
   connect() {
-    console.log('coucou');
-    console.log(this.userIdValue, this.insertTarget);
     this.channel = createConsumer().subscriptions.create(
       { channel: 'TablepostChannel', id: this.userIdValue },
       { received: data => {
