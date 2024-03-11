@@ -13,6 +13,13 @@
  *= require_tree .
  *= require_self
  */
+.page {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
 
 .bullet-point::before {
@@ -30,4 +37,3 @@
   background-clip: text;
   color: transparent;
 }
-
