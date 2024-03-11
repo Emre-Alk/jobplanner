@@ -5,25 +5,28 @@ Chart.register(...registerables);
 // Connects to data-controller="chart"
 export default class extends Controller {
   static targets = ["donut"]
+  static values = {
+    data: Object,
+    colors: Array
+  }
 
   connect() {
-    console.log("Hello, Stimulus!", this.element);
-    console.log(this.donutTarget);
+    console.log(this.dataValue);
+
+    let counts = [];
+    let colors = [];
+
+    for(let key in this.dataValue) {
+        counts.push(this.dataValue[key].count);
+        colors.push(this.dataValue[key].color);
+    }
 
     const data = {
-      labels: [
-        'pending',
-        'applied',
-        'rejected'
-      ],
+      labels: Object.keys(this.dataValue),
       datasets: [{
-        label: 'My First Dataset',
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
-        ],
+        label: 'Statuts',
+        data: counts,
+        backgroundColor: colors,
         hoverOffset: 4
       }]
     };
