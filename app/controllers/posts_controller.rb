@@ -31,7 +31,14 @@ class PostsController < ApplicationController
       }
     )
   end
-
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      redirect_to posts_url, notice: "Post was successfully destroyed."
+    else
+      # Handle error
+    end
+    
   private
 
   def set_posts_per_day(posts)
