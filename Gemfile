@@ -76,3 +76,4 @@ gem "ruby-openai"
 gem "dotenv-rails", groups: %i[development test]
 gem "sidekiq", '~> 6.5.5'
 gem "sidekiq-failures"
+gem "font-awesome-sass", "~> 6.1"
