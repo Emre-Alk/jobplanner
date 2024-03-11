@@ -20,3 +20,20 @@
   top: 0;
   left: 0;
 }
+
+
+.bullet-point::before {
+   content: '\2022'; /* Code du caractère point (bullet) */
+   color: #4a5568; /* Couleur du point */
+   margin-right: 8px; /* Marge à droite du point pour l'espacement */
+ }
+
+ .lilita-one-regular {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-image: linear-gradient(to right, #F3322B, #fc894d); /* Change colors as needed */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
