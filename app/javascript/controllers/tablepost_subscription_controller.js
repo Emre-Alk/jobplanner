@@ -9,8 +9,6 @@ export default class extends Controller {
   static targets = ["insert"]
 
   connect() {
-    console.log('coucou');
-    console.log(this.userIdValue, this.insertTarget);
     this.channel = createConsumer().subscriptions.create(
       { channel: 'TablepostChannel', id: this.userIdValue },
       { received: data => {
@@ -34,8 +32,12 @@ export default class extends Controller {
     if (oldPost) {
       oldPost.outerHTML = postHTML
     } else {
-      this.insertTarget.insertAdjacentHTML("beforeend", postHTML)
+      this.insertTarget.insertAdjacentHTML("afterbegin", postHTML)
       this.insertTarget.scrollTo(0, this.insertTarget.scrollHeight)
+      let lottie = document.querySelectorAll(`.spinner-${data.post_id}`)
+      console.log(lottie)
+      lottie.forEach((element) => element.classList.toggle('hidden'))
     }
   }
+
 }
