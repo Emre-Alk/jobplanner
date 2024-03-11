@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
     @user = current_user
-    set_posts_per_day
+    @posts = current_user.posts
+    set_posts_per_day(@posts)
     set_status_frequency(@posts)
   end
 
@@ -42,8 +42,8 @@ class PostsController < ApplicationController
 
   private
 
-  def set_posts_per_day
-    posts = Post.where(status: 'applied')
+  def set_posts_per_day(posts)
+    posts = posts.where(status: 'applied')
     posts_per_day = {}
     posts.each do |post|
       date = post.updated_at.strftime("%Y-%m-%d")
