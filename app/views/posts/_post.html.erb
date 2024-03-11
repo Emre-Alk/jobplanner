@@ -34,13 +34,6 @@
   </th>
 
   <td class="whitespace-nowrap px-3 py-1 text-sm text-500">
-      <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
-    <% if post.status == "applied" %>
-      <span class="spinner-<%= post.id %> inline-flex items-center rounded-md bg-green-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-green-600/20"><%= post.status %></span>
-    <% elsif post.status == "rejected" %>
-      <span class="spinner-<%= post.id %> inline-flex items-center rounded-md bg-red-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-red-600/20"><%= post.status %></span>
-    <% else %>
-      <span class="spinner-<%= post.id %> inline-flex items-center rounded-md bg-yellow-500 px-2 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-yellow-600/20"><%= post.status %></span>
-    <% end %>
+    <span class="spinner-<%= post.id %> inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-white" style="background-color: <%=post.color%>"><%= post.status %></span>
   </td>
 </tr>
