@@ -4,12 +4,22 @@ class Post < ApplicationRecord
   has_many :stacks, through: :post_stacks
   belongs_to :user
 
-
   enum status: {
     pending: 0,
     applied: 10,
     rejected: 30
   }
+
+  def color
+    case status
+    when "pending"
+      "#eab308"
+    when "applied"
+      "#38a169"
+    when "rejected"
+      "#e53e3e"
+    end
+  end
 
   enum scrap_status: {
     initializing: 0,
