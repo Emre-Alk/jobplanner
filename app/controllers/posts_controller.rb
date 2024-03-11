@@ -38,7 +38,8 @@ class PostsController < ApplicationController
     else
       # Handle error
     end
-    
+  end
+
   private
 
   def set_posts_per_day(posts)
