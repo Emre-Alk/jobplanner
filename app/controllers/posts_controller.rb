@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
     @user = current_user
+    @posts = current_user.posts
     set_posts_per_day(@posts)
     set_status_frequency(@posts)
   end
