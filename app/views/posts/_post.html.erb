@@ -19,7 +19,9 @@
     <% end %>
     </div>
   </th>
-  <%# <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name</th> %>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name %>
+    <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
+  </th>
 
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.location %>
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
@@ -29,7 +31,7 @@
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
   </th>
 
-  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.published_on&.strftime("%Y-%m-%d") %>
+  <th scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.updated_at.strftime("%Y-%m-%d") %>
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
   </th>
 
