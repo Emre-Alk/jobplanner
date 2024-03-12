@@ -12,7 +12,8 @@ class Api::V1::PostsController < Api::V1::BaseController
         {
           message: "partial",
           post_id: post.id,
-          html: render_to_string(partial: "posts/post", locals: { post: }, formats: :html)
+          html_table_row: render_to_string(partial: "posts/post", locals: { post: }, formats: :html),
+          html_chart: false
         }
       )
       OpenAiJob.perform_later(post.id, @user)
