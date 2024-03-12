@@ -1,8 +1,10 @@
-<div class="grid grid-cols-1 gap-y-16 mx-16">
-  <%= render partial: 'components/stats', locals: { posts_per_day: @posts_per_day, status_frequency: @status_frequency}%>
+<div class="grid grid-cols-1 gap-y-16 mx-16" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user&.id %>">
+  <div class="rounded-3xl shadow-lg bg-white" id="stats">
+    <%= render partial: 'components/stats', locals: { posts_per_day: @posts_per_day, status_frequency: @status_frequency}%>
+  </div>
   <div class="rounded-3xl shadow-lg bg-white p-4">
     <div class="overflow-x-auto whitespace-nowrap">
-      <table class="divide-y divide-gray-300 w-full table-auto" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user&.id %>">
+      <table class="divide-y divide-gray-300 w-full table-auto">
       <thead>
           <tr class="bg-gray-800">
               <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Title</th>
