@@ -39,7 +39,6 @@ class OpenAiJob < ApplicationJob
       post
     )
 
-
     # Broadcast to the posts index
   end
 end

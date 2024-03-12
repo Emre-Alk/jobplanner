@@ -14,6 +14,11 @@ export default class extends Controller {
       { received: data => {
         if (data.message == "partial") {
           this.#insertPost(data)
+          if(data.html_chart) {
+
+            let chart = document.getElementById('stats')
+            chart.innerHTML = data.html_chart
+          }
         } else {
           this.fetchPost(data)
         }
@@ -27,7 +32,7 @@ export default class extends Controller {
 
 // data c'est instance
   #insertPost(data) {
-    const postHTML = data.html
+    const postHTML = data.html_table_row
     const oldPost = document.getElementById(`${data.post_id}`)
     if (oldPost) {
       oldPost.outerHTML = postHTML
@@ -39,5 +44,4 @@ export default class extends Controller {
       lottie.forEach((element) => element.classList.toggle('hidden'))
     }
   }
-
 }
