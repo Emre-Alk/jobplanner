@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   enum status: {
     pending: 0,
     applied: 10,
+    interviewed: 20,
     rejected: 30
   }
 
@@ -16,6 +17,8 @@ class Post < ApplicationRecord
       "#eab308"
     when "applied"
       "#38a169"
+    when "interviewed"
+      "#94C1EA"
     when "rejected"
       "#e53e3e"
     end

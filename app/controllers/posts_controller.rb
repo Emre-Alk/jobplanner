@@ -18,6 +18,14 @@ class PostsController < ApplicationController
   end
 
   def update
+    status = params[:content]
+    @post = Post.find(params[:id])
+    @post.status = status
+    if @post.save
+      render json: { html_status: render_to_string(partial: "posts/status", locals: { post: @post }, formats: :html) }
+    else
+      render status: '400'
+    end
   end
 
   def render_post_partial
