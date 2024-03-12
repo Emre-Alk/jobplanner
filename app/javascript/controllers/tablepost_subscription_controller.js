@@ -31,6 +31,7 @@ export default class extends Controller {
     const oldPost = document.getElementById(`${data.post_id}`)
     if (oldPost) {
       oldPost.outerHTML = postHTML
+      console.log(oldPost);
     } else {
       this.insertTarget.insertAdjacentHTML("afterbegin", postHTML)
       this.insertTarget.scrollTo(0, this.insertTarget.scrollHeight)
