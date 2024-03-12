@@ -13,9 +13,21 @@ class OpenAiJob < ApplicationJob
     post.update(scrap_status: 'successful')
     parsed_response = JSON.parse(response)&.symbolize_keys
     return unless parsed_response
-    puts "✅✅✅✅✅✅✅✅✅✅"
+    puts "---------------------------------------------------------------------------------------------------------------------------------------------------------------------"
     p parsed_response
-    puts "✅✅✅✅✅✅✅✅✅✅"
+    puts "--------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+    if parsed_response[:published_on]
+      puts parsed_response[:published_on]
+      begin
+        parsed_date = Date.parse(parsed_response[:published_on])
+        parsed_response[:published_on] = parsed_date
+      rescue Date::Error => e
+        puts "Error parsing date: #{e.message}"
+        # Handle the error, maybe set to nil or provide a default date
+        parsed_response[:published_on] = nil # or Date.today, as a fallback
+      end
+    end
 
     company = Company.find_or_create_by(name: parsed_response[:company_name])
 
@@ -32,13 +44,16 @@ class OpenAiJob < ApplicationJob
     parsed_response.delete(:programming_language_stack) if parsed_response[:programming_language_stack]
 
     post.update(parsed_response)
-    post.company = company if company
+    if company
+      post.update(company: company)
+    end
+
+
 
     TablepostChannel.broadcast_to(
       user,
       post
     )
-
     # Broadcast to the posts index
   end
 end
