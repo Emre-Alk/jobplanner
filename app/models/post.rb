@@ -30,4 +30,6 @@ class Post < ApplicationRecord
     failed: 20,
     successful: 30,
   }
+
+  validates :url, presence: true, uniqueness: true
 end
