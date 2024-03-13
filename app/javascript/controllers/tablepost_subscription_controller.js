@@ -9,13 +9,16 @@ export default class extends Controller {
   static targets = ["insert"]
 
   connect() {
-    console.log('coucou');
-    console.log(this.userIdValue, this.insertTarget);
     this.channel = createConsumer().subscriptions.create(
       { channel: 'TablepostChannel', id: this.userIdValue },
       { received: data => {
         if (data.message == "partial") {
           this.#insertPost(data)
+          if(data.html_chart) {
+
+            let chart = document.getElementById('stats')
+            chart.innerHTML = data.html_chart
+          }
         } else {
           this.fetchPost(data)
         }
@@ -29,13 +32,17 @@ export default class extends Controller {
 
 // data c'est instance
   #insertPost(data) {
-    const postHTML = data.html
+    const postHTML = data.html_table_row
     const oldPost = document.getElementById(`${data.post_id}`)
     if (oldPost) {
       oldPost.outerHTML = postHTML
+      console.log(oldPost);
     } else {
-      this.insertTarget.insertAdjacentHTML("beforeend", postHTML)
+      this.insertTarget.insertAdjacentHTML("afterbegin", postHTML)
       this.insertTarget.scrollTo(0, this.insertTarget.scrollHeight)
+      let lottie = document.querySelectorAll(`.spinner-${data.post_id}`)
+      console.log(lottie)
+      lottie.forEach((element) => element.classList.toggle('hidden'))
     }
   }
 }

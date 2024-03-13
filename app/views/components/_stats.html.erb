@@ -1,19 +1,28 @@
-<div class="shadow-md rounded-3xl bg-white ">
-  <%# <h2  class="px-8">Hello</h2> %>
-  <div class="flex gap-4 h-64 relative flex items-center justify-center">
-    <div class="w-1/4 p-4">
-      <p class="text-xl xl:text-3xl font-medium text-black">12 applications submitted</p>
-      <p class="text-lg xl:text-2xl font-medium text-black">25 offers saved</p>
+<div class="flex gap-4 h-64 relative flex items-center justify-center">
+  <div class="w-1/4 p-4">
+    <div class="flex items-center text-xl xl:text-3xl font-medium text-gray-500">
+      <span class="bg-gray-100 p-2 m-2 rounded-lg shadow-inner">
+        <% if status_frequency.has_key?('applied') %>
+          <%= status_frequency['applied'][:count] %>
+        <% else %>
+          0
+        <% end %>
+        </span>
+      <p>submissions made</p>
     </div>
-    <div class="w-1/2 p-4 h-5/6 relative flex items-center justify-center">
-      <div data-controller="line" class="h-full w-full absolute flex items-center justify-center">
-        <canvas data-line-target="line" id="line_chart" ></canvas>
-      </div>
+    <div class="flex items-center text-lg xl:text-2xl font-medium text-gray-500">
+      <span class="bg-gray-100 p-2 m-2 rounded-lg shadow-inner"><%= status_frequency.values.sum { |value| value[:count] } %></span>
+      <p>offers bookmarked</p>
     </div>
-    <div class="w-1/4 p-4 h-64 relative flex items-center justify-center">
-      <div data-controller="doughnut" class="h-full w-full absolute flex items-center justify-center">
-        <canvas data-doughnut-target="donut" id="donut_chart"></canvas>
-      </div>
+  </div>
+  <div class="w-1/2 p-4 h-5/6 relative flex items-center justify-center">
+    <div class="h-full w-full absolute flex items-center justify-center">
+      <canvas data-controller="line" data-line-data-value = "<%= posts_per_day.to_json %>" data-line-target="line" id="line_chart" ></canvas>
+    </div>
+  </div>
+  <div class="w-1/4 p-4 h-64 relative flex items-center justify-center">
+    <div class="h-full w-full absolute flex items-center justify-center">
+      <canvas data-controller="doughnut" data-doughnut-data-value = "<%= status_frequency.to_json %>" data-doughnut-target="donut" id="donut_chart"></canvas>
     </div>
   </div>
 </div>
