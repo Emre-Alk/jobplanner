@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_many :post_stacks, dependent: :destroy
   has_many :stacks, through: :post_stacks
   belongs_to :user
-  has_rich_text :content
+  # has_rich_text :content
 
   enum status: {
     pending: 0,
