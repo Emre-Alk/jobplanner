@@ -15,10 +15,10 @@ class OpenAiService
         "title": "title",
         "location": "location",
         "contract_type": "contract_type",
-        "published_on": "published_on",
+        "published_on": "YYYY-MM-DD",
         "description": "description",
         "experience_years": "experience_years",
-        "company_name": "company_name",
+        "company_name": "give the publisher company_name",
         "programming_language_stack": ["programming_language_stack_1","programming_language_stack_2","..."]
       }'
 

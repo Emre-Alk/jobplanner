@@ -30,12 +30,16 @@ class PostsController < ApplicationController
 
   def render_post_partial
     @post = Post.find(params[:id])
+    @posts = current_user.posts
+    set_posts_per_day(@posts)
+    set_status_frequency(@posts)
     TablepostChannel.broadcast_to(
       current_user,
       {
         message: "partial",
         post_id: @post.id,
-        html: render_to_string(partial: "posts/post", locals: { post: @post }, formats: :html)
+        html_table_row: render_to_string(partial: "posts/post", locals: { post: @post }, formats: :html),
+        html_chart: render_to_string(partial: "components/stats", locals: {posts_per_day: @posts_per_day, status_frequency: @status_frequency}, formats: :html)
       }
     )
   end
