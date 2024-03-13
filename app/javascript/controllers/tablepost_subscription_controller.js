@@ -34,14 +34,13 @@ export default class extends Controller {
   #insertPost(data) {
     const postHTML = data.html_table_row
     const oldPost = document.getElementById(`${data.post_id}`)
+
     if (oldPost) {
       oldPost.outerHTML = postHTML
-      console.log(oldPost);
     } else {
       this.insertTarget.insertAdjacentHTML("afterbegin", postHTML)
       this.insertTarget.scrollTo(0, this.insertTarget.scrollHeight)
       let lottie = document.querySelectorAll(`.spinner-${data.post_id}`)
-      console.log(lottie)
       lottie.forEach((element) => element.classList.toggle('hidden'))
     }
   }
