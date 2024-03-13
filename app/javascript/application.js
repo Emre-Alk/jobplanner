@@ -5,3 +5,6 @@ import "@rails/actioncable"
 //import "chart.js"
 import "channels"
 import "@lottiefiles/lottie-player"
+
+import "trix"
+import "@rails/actiontext"

@@ -11,7 +11,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.dataValue);
 
     let counts = [];
     let colors = [];
