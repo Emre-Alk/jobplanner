@@ -3,7 +3,7 @@
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
       <div data-controller="modal">
         <button data-action="modal#open" class="btn-outline"><%= post.title%></button>
-          <dialog data-modal-target="modal" class="max-w-screen-md rounded-3xl bg-gray-100">
+          <dialog data-modal-target="modal" class="w-3/5 rounded-lg bg-gray-100">
             <%= render "posts/show", post: post %>
           </dialog>
       </div>
