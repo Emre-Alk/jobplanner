@@ -19,4 +19,17 @@ export default class extends Controller {
   backdropClick(event) {
     event.target === this.modalTarget && this.close(event);
   }
+
+  addComment(event) {
+    event.preventDefault();
+
+    // Récupérer les données du formulaire
+    const formData = new FormData(event.target);
+    const commentText = formData.get('comment');
+
+    // Faites quelque chose avec le commentaire (envoyez-le au serveur, mettez à jour l'interface utilisateur, etc.)
+
+    // Fermez la boîte de dialogue après avoir ajouté le commentaire (ajustez selon vos besoins)
+    this.close(event);
+  }
 }
