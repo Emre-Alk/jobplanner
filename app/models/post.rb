@@ -32,5 +32,5 @@ class Post < ApplicationRecord
     successful: 30,
   }
 
-  validates :url, presence: true, uniqueness: true
+  validates :url, presence: true, uniqueness: true, on: :create
 end
