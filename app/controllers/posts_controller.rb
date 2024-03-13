@@ -22,10 +22,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.status = status
     @posts = current_user.posts
-    set_posts_per_day(@posts)
-    set_status_frequency(@posts)
     if @post.save
       render json: { html_status: render_to_string(partial: "posts/status", locals: { post: @post }, formats: :html) }
+      set_posts_per_day(@posts)
+      set_status_frequency(@posts)
       TablepostChannel.broadcast_to(
       current_user,
       {
