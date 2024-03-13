@@ -8,9 +8,6 @@ export default class extends Controller {
   static targets = [ 'dropdown', 'current', 'menu', 'insert' ];
 
   connect() {
-    console.log('status connected !');
-    console.log(this.postIdValue);
-    console.log(this.dropdownTarget);
   }
 
   edit() {
@@ -19,10 +16,7 @@ export default class extends Controller {
 
   update(event) {
     const status = event.target.outerText.toLowerCase();
-    // console.log(status);
-    // console.log(this.postIdValue);
     const url = `/posts/${this.postIdValue}`
-    console.log(url);
     const details = {
       method: 'PATCH',
       headers: {
@@ -38,7 +32,6 @@ export default class extends Controller {
     fetch(url, details)
     .then(response => response.json())
     .then((data) =>
-    // console.log(data)
     button.innerHTML = data.html_status,
     this.dropdownTarget.classList.toggle('hidden'),
     )
