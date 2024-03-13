@@ -4,22 +4,74 @@
   </div>
   <div class="rounded-3xl shadow-lg bg-white p-4">
     <div class="overflow-x-auto whitespace-nowrap">
-      <table class="divide-y divide-gray-300 w-full table-auto">
-      <thead>
-          <tr class="bg-gray-800">
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Title</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Stack</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Company</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Location</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Contract</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Last Update</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Status</th>
-          </tr>
+      <table class="divide-y divide-gray-300 w-full table-auto" data-controller="sort-table">
+      <thead data-sort-table-target="thead">
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex" data-action="click->sort-table#sort" id="title">
+                Title
+              <!-- No sorted icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex" id="stack">
+              Stack
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex" id="stack">
+              Company
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900" data-action="click->sort-table#sort">
+            <div class="flex" data-action="click->sort-table#sort" id="location">
+              Location
+              <!-- No sorted icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900" data-action="click->sort-table#sort">
+            <div class="flex" data-action="click->sort-table#sort" id="contract_type">
+              Contract
+              <!-- No sorted icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900" data-action="click->sort-table#sort">
+            <div class="flex" data-action="click->sort-table#sort"  id="updated_at">
+              Last Update
+              <!-- No sorted icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900" data-action="click->sort-table#sort">
+            <div class="flex" data-action="click->sort-table#sort"  id="status">
+              Status
+              <!-- No sorted icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+              </svg>
+            </div>
+          </th>
+        <tr class="bg-gray-800">
+        </tr>
       </thead>
-      <tbody data-tablepost-subscription-target="insert">
-        <% @posts.each do |post| %>
-          <%= render post %>
-        <% end %>
+      <tbody data-tablepost-subscription-target="insert" data-sort-table-target="tbody">
+        <%= render partial: 'tbody', locals: { posts: @posts } %>
       </tbody>
     </table>
     </div>

@@ -19,10 +19,13 @@ class PostsController < ApplicationController
 
   def update
     status = params[:content]
+
     @post = Post.find(params[:id])
     @post.status = status
+
     @posts = current_user.posts
     if @post.save
+      puts "status updated!"
       render json: { html_status: render_to_string(partial: "posts/status", locals: { post: @post }, formats: :html) }
       set_posts_per_day(@posts)
       set_status_frequency(@posts)
@@ -36,6 +39,7 @@ class PostsController < ApplicationController
       }
     )
     else
+      puts "status not updated!"
       render status: '400'
     end
   end
@@ -55,6 +59,7 @@ class PostsController < ApplicationController
       }
     )
   end
+
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
@@ -62,6 +67,15 @@ class PostsController < ApplicationController
     else
       # Handle error
     end
+  end
+
+  def sort
+    column = params[:column]
+    direction = params[:direction]
+
+    @posts = current_user.posts.order("#{column} #{direction}")
+
+    render json: { html_table: render_to_string(partial: "posts/tbody", locals: { posts: @posts }, formats: :html) }
   end
 
   private
