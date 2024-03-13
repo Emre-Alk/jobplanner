@@ -11,3 +11,5 @@ pin "@rails/actioncable", to: "@rails--actioncable.js" # @7.1.3
 pin "@rails/actioncable", to: "actioncable.esm.js"
 pin_all_from "app/javascript/channels", under: "channels"
 pin "@lottiefiles/lottie-player", to: "https://cdn.jsdelivr.net/npm/@lottiefiles/lottie-player"
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"

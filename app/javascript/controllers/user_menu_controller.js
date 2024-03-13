@@ -7,10 +7,8 @@ export default class extends Controller {
     this.pageTarget.classList.toggle("hidden")
   }
   connect(){
-    console.log("test")
   }
   close(event) {
-    console.log(event.target)
     this.linkTarget.classList.add("hidden")
     this.pageTarget.classList.toggle("hidden")
   }

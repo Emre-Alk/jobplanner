@@ -18,25 +18,39 @@ class PostsController < ApplicationController
   end
 
   def update
-    status = params[:content]
     @post = Post.find(params[:id])
-    @post.status = status
     @posts = current_user.posts
-    if @post.save
-      render json: { html_status: render_to_string(partial: "posts/status", locals: { post: @post }, formats: :html) }
-      set_posts_per_day(@posts)
-      set_status_frequency(@posts)
-      TablepostChannel.broadcast_to(
-      current_user,
-      {
-        message: "partial",
-        post_id: @post.id,
-        html_table_row: render_to_string(partial: "posts/post", locals: { post: @post }, formats: :html),
-        html_chart: render_to_string(partial: "components/stats", locals: {posts_per_day: @posts_per_day, status_frequency: @status_frequency}, formats: :html)
-      }
-    )
-    else
-      render status: '400'
+
+    respond_to do |format|
+      format.html
+      format.json do
+        status = params[:content]
+        @post.status = status
+
+        if @post.save
+          render json: { html_status: render_to_string(partial: "posts/status", locals: { post: @post }, formats: :html) }
+          set_posts_per_day(@posts)
+          set_status_frequency(@posts)
+          TablepostChannel.broadcast_to(
+          current_user,
+          {
+            message: "partial",
+            post_id: @post.id,
+            html_table_row: render_to_string(partial: "posts/post", locals: { post: @post }, formats: :html),
+            html_chart: render_to_string(partial: "components/stats", locals: {posts_per_day: @posts_per_day, status_frequency: @status_frequency}, formats: :html)
+          }
+        )
+        else
+          render status: '400'
+        end
+      end
+      format.text do
+        if @post.update(form_params)
+          render partial: "posts/comment", locals: { post: @post }, formats: [:html]
+        else
+          render plain: "couldn't update note"
+        end
+      end
     end
   end
 
@@ -91,5 +105,9 @@ class PostsController < ApplicationController
       end
     end
     @status_frequency = status_frequency
+  end
+
+  def form_params
+    params.require(:post).permit(:comment)
   end
 end
