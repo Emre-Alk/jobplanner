@@ -16,5 +16,8 @@ Rails.application.routes.draw do
     member do
       get :render_post_partial
     end
+    collection do
+      get :sort
+    end
   end
 end
