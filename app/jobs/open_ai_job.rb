@@ -13,6 +13,7 @@ class OpenAiJob < ApplicationJob
     post.update(scrap_status: 'successful')
     parsed_response = JSON.parse(response)&.symbolize_keys
     return unless parsed_response
+
     puts "---------------------------------------------------------------------------------------------------------------------------------------------------------------------"
     p parsed_response
     puts "--------------------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -44,11 +45,8 @@ class OpenAiJob < ApplicationJob
     parsed_response.delete(:programming_language_stack) if parsed_response[:programming_language_stack]
 
     post.update(parsed_response)
-    if company
-      post.update(company: company)
-    end
 
-
+    post.update(company:) if company
 
     TablepostChannel.broadcast_to(
       user,

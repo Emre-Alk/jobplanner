@@ -36,7 +36,7 @@ class PostsController < ApplicationController
           {
             message: "partial",
             post_id: @post.id,
-            html_table_row: render_to_string(partial: "posts/post", locals: { post: @post }, formats: :html),
+            html_table_row: render_to_string(partial: "posts/post", locals: { post: @post, form: true }, formats: :html),
             html_chart: render_to_string(partial: "components/stats", locals: {posts_per_day: @posts_per_day, status_frequency: @status_frequency}, formats: :html)
           }
         )
@@ -67,8 +67,8 @@ class PostsController < ApplicationController
       {
         message: "partial",
         post_id: @post.id,
-        html_table_row: render_to_string(partial: "posts/post", locals: { post: @post }, formats: :html),
-        html_chart: render_to_string(partial: "components/stats", locals: {posts_per_day: @posts_per_day, status_frequency: @status_frequency}, formats: :html)
+        html_table_row: render_to_string(partial: "posts/post", locals: { post: @post, form: true }, formats: :html),
+        html_chart: render_to_string(partial: "components/stats", locals: { posts_per_day: @posts_per_day, status_frequency: @status_frequency}, formats: :html)
       }
     )
   end
