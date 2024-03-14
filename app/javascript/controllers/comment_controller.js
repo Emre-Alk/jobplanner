@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="comment"
 export default class extends Controller {
-  static targets = ['form', 'dataForm', 'insert']
+  static targets = ['form', 'dataForm', 'insert', 'button']
   static values = {
     postId: Number
   }
@@ -13,10 +13,10 @@ export default class extends Controller {
 
   displayForm() {
     this.formTarget.classList.toggle('hidden')
+    this.insertTarget.querySelector('.trix-content').classList.toggle('hidden')
   }
 
   update(event) {
-    // debugger
     event.preventDefault()
     const url = `/posts/${this.postIdValue}`
     const details = {
@@ -28,17 +28,26 @@ export default class extends Controller {
       },
       body: new FormData(this.dataFormTarget)
     }
-    console.log(new FormData(this.dataFormTarget))
-    console.log(this.dataFormTarget);
 
     fetch(url, details)
     .then(response => response.text())
     .then((data) => {
-      console.log(typeof data);
-      // let comment = data.slice(5, -6)
-      this.insertTarget.innerHTML = data
-      this.formTarget.classList.toggle('hidden')
-    })
 
+      this.insertTarget.innerHTML = data
+      this.insertTarget.querySelector('.trix-content').classList.remove('hidden')
+      this.formTarget.classList.toggle('hidden')
+
+      const div = document.createElement('div')
+      div.innerHTML = data
+      const word = div.innerText.trim()
+
+      if (Object.keys(word).length === 0 ) {
+        console.log('vide');
+        this.buttonTarget.innerText = 'Add a note'
+      } else {
+        console.log('no vide');
+        this.buttonTarget.innerText = 'Edit note'
+      }
+    })
   }
 }
