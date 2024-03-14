@@ -10,13 +10,14 @@ export default class extends Controller {
   sort(event) {
     let direction = "asc";
     let column = event.target.id;
-    const icon = event.target.querySelector('svg');
+    const icon = event.target.parentNode.querySelector('svg');
 
     if (icon) {
       direction = icon.dataset.state === "asc" ? "desc" : "asc";
     }
 
     const url = `posts/sort/?column=${column}&direction=${direction}`
+
     const details = {
       method: 'GET',
       headers: {
