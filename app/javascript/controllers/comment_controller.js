@@ -8,7 +8,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log('comment controller')
   }
 
   displayForm() {
@@ -42,11 +41,9 @@ export default class extends Controller {
       const word = div.innerText.trim()
 
       if (Object.keys(word).length === 0 ) {
-        console.log('vide');
-        this.buttonTarget.innerText = 'Add a note'
+        this.buttonTarget.innerText = 'Commenter'
       } else {
-        console.log('no vide');
-        this.buttonTarget.innerText = 'Edit note'
+        this.buttonTarget.innerText = 'Editer'
       }
     })
   }
