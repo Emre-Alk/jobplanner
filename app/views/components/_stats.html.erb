@@ -1,18 +1,18 @@
 <div class="flex gap-4 h-64 relative flex items-center justify-center">
   <div class="w-1/4 p-4">
-    <div class="flex items-center text-xl xl:text-3xl font-medium text-gray-500">
+    <div class="flex items-center text-lg xl:text-2xl font-medium text-gray-500">
       <span class="bg-gray-100 p-2 m-2 rounded-lg shadow-inner">
-        <% if status_frequency.has_key?('applied') %>
-          <%= status_frequency['applied'][:count] %>
+        <% if status_frequency.has_key?('candidaté') %>
+          <%= status_frequency['candidaté'][:count] %>
         <% else %>
           0
         <% end %>
         </span>
-      <p>submissions made</p>
+      <p>Candidatures envoyées</p>
     </div>
     <div class="flex items-center text-lg xl:text-2xl font-medium text-gray-500">
       <span class="bg-gray-100 p-2 m-2 rounded-lg shadow-inner"><%= status_frequency.values.sum { |value| value[:count] } %></span>
-      <p>offers bookmarked</p>
+      <p>Annonces ajoutées</p>
     </div>
   </div>
   <div class="w-1/2 p-4 h-5/6 relative flex items-center justify-center">
