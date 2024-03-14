@@ -3,7 +3,7 @@
   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
     <div data-controller="modal">
-      <button data-action="modal#open" class="btn-outline"><div class="truncate"><%= post.title %></div></button>
+      <button data-action="modal#open" class="btn-outline"><div class="truncate-350"><%= post.title %></div></button>
       <dialog data-modal-target="modal" class="w-3/5 rounded-lg bg-gray-100">
         <%= render "posts/show", post: post %>
       </dialog>
@@ -13,21 +13,22 @@
   <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
       <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
     <div class="flex gap-1">
-      <% post.stacks.each do |stack| %>
+      <% post.stacks.first(4).each do |stack| %>
         <i class="text-3xl devicon-<%= stack.name %>-plain colored"></i>
         <%#= stack.name %>
     <% end %>
     </div>
   </td>
-  <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.company&.name %>
+  <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500">
+    <div class="truncate-200"><%= post.company&.name %></div>
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
   </td>
 
-  <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.location %>
+  <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><div class="truncate-200"><%= post.location %></div>
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
   </td>
 
-  <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><%= post.contract_type %>
+  <td scope="col" class="px-3 py-3.5 text-left text-sm font-medium text-gray-500"><div class="truncate-150"><%= post.contract_type %></div>
     <lottie-player class="spinner-<%= post.id %> hidden" src="<%= image_path("lottie/spinner.json")%>" background="transparent" speed="1" style="width: 58.3px; height: 58.3px" direction="1" playMode="normal" loop autoplay></lottie-player>
   </td>
 
