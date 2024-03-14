@@ -81,7 +81,7 @@ class PostsController < ApplicationController
   private
 
   def set_posts_per_day(posts)
-    posts = posts.where(status: 'applied')
+    posts = posts.where(status: 'candidaté')
     posts_per_day = {}
     posts.each do |post|
       date = post.updated_at.strftime("%Y-%m-%d")

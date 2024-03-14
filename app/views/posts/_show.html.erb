@@ -14,11 +14,11 @@
       <div data-controller="comment" data-comment-post-id-value="<%= post.id %>">
         <div style="text-align: right;">
           <a href= "<%= post.url %>" target="_blank" class="inline-flex items-center bg-gray-900 text-white rounded-3xl px-3 py-2 text-sm font-medium mb-4 transition duration-300 ease-in-out hover:bg-gray-800 hover:text-gray-200 hover:bg-opacity-80">
-            Apply <svg class="h-6 w-6 text-zinc-100 ml-2 mb-1"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />  <line x1="10" y1="14" x2="20" y2="4" />  <polyline points="15 4 20 4 20 9" /></svg>
+            Postuler <svg class="h-6 w-6 text-zinc-100 ml-2 mb-1"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />  <line x1="10" y1="14" x2="20" y2="4" />  <polyline points="15 4 20 4 20 9" /></svg>
           </a>
           <div>
             <button data-action="click->comment#displayForm" class="inline-flex items-center bg-gray-100 text-gray-800 rounded-3xl px-3 py-2 text-sm font-medium mb-4 transition duration-300 ease-in-out hover:bg-gray-400 hover:text-gray-900 text-gray-800 hover:bg-opacity-80 border border-neutral-800">
-            Add a note
+            Commenter
             </button>
           </div>
         </div>
@@ -35,8 +35,8 @@
           <hr class="my-2 border-t-2 border-gray-300">
       </div>
 
-      <p class="text-gray-600 mb-2"><i>Published on <strong><%= post.published_on%></i></strong></p>
-      <p class="text-gray-600 mb-2"><i>Experience years : <strong><%= post.experience_years%></i></strong></p>
+      <p class="text-gray-600 mb-2"><i>Publié le <strong><%= post.published_on%></i></strong></p>
+      <p class="text-gray-600 mb-2"><i>Années d'expérience : <strong><%= post.experience_years%></i></strong></p>
       <div class="mb-4 whitespace-normal">
 
         <div class="flex items-center mb-1 p-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
@@ -49,10 +49,13 @@
         <div class="flex items-center mb-1 p-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1">
           <path fill-rule="evenodd" d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm14.25 6a.75.75 0 0 1-.22.53l-2.25 2.25a.75.75 0 1 1-1.06-1.06L15.44 12l-1.72-1.72a.75.75 0 1 1 1.06-1.06l2.25 2.25c.141.14.22.331.22.53Zm-10.28-.53a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-2.25 2.25Z" clip-rule="evenodd" />
           </svg>
+          &nbsp;
           <% post.stacks.each do |stack| %>
             <div class="flex gap-1">
               <i class=" text-xl devicon-<%= stack.name%>-plain colored"></i>
-              <%= stack.name %>
+              <%= stack.name.capitalize %>
+              &nbsp;
+              &nbsp;
             </div>
           <% end %>
         </div>
@@ -71,7 +74,7 @@
           <%= post.contract_type%>
         </div>
 
-        <div class="flex items-center mb-1 p-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
+        <div class="flex items-center mb-1 p-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"  class="w-6 h-6 mr-2">
           <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
           </svg>
           <%= post.description %>
