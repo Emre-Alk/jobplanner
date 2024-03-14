@@ -10,8 +10,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("connected");
-    console.log(this.dataValue);
 
     const sortedKeys = Object.keys(this.dataValue).sort((a, b) => new Date(a) - new Date(b));
     const sortedValues = sortedKeys.map(key => this.dataValue[key]);
