@@ -5,7 +5,7 @@
     <div data-controller="modal">
       <button data-action="modal#open" class="btn-outline"><div class="truncate-350"><%= post.title %></div></button>
       <dialog data-modal-target="modal" class="w-3/5 rounded-lg bg-gray-100">
-        <%= render "posts/show", post: post %>
+        <%= render "posts/show", post: post, form: form %>
       </dialog>
     </div>
   </th>
