@@ -6,11 +6,12 @@ Company.destroy_all
 User.destroy_all
 Stack.destroy_all
 puts "Destroy all posts, users, stacks, companies"
+
 job_titles = [
   "Développeur Web Full Stack",
   "Développeur Full Stack Senior",
   "Ingénieur Full Stack",
-  "Développeur Full Stack Junior",
+  "Développeur Full Stack",
   "Lead Développeur Web Full Stack",
   "Expert Full Stack",
   "Développeur Full Stack - Projets Innovants",
@@ -40,6 +41,7 @@ contract_types = [
   "Contrat freelance",
   "CDD - 24 mois"
 ]
+
 location = [
   "Lyon",
   "Paris",
@@ -48,6 +50,7 @@ location = [
   "Bordeaux",
   "Télétravail"
 ]
+
 comp = [
 "Eiffage",
 "Solvay S.A.",
@@ -75,6 +78,7 @@ comp = [
 "TotalEnergies",
 "Veepee"
 ]
+
 stac = [
 "rails",
 "ruby",
@@ -89,20 +93,25 @@ stac = [
 "css3",
 "tailwindcss"
 ]
+r
 user = User.create!(
   email: 'a@a.com',
   password: '123456',
   token: 'token'
 )
 puts "#{user.email} - #{user.password} "
+
 i = 10
+
 25.times do
   faker_company = comp.shuffle!.pop
   faker_location = location.sample
   faker_title = job_titles.sample
   faker_date = Faker::Date.between(from: 15.days.ago, to: Date.today)
   faker_contract_type = contract_types.sample
-  faker_stack = stac.sample
+  faker_stack = stac.sample(3)
+  p faker_stack
+
   company = Company.new(name: faker_company)
   p company
   company.save!
@@ -114,7 +123,7 @@ i = 10
     url: "https://fr.indeed.com/?r=us&vjk=87aa6baacd5c5711&advn=12366446329411#{i}",
     description: "Une entreprise leader dans les solutions technologiques innovantes, recherche un Développeur Full Stack passionné et expérimenté pour rejoindre notre équipe dynamique. Si vous êtes motivé par les défis techniques et souhaitez contribuer à la création de produits révolutionnaires, ce poste est pour vous.",
     experience_years: rand(0..4).to_i,
-    status: [0, 10, 30].sample.to_i,
+    status: [0, 10, 20, 30].sample.to_i,
     updated_at: faker_date
   )
   post.user = user
@@ -128,6 +137,13 @@ i = 10
   post_stack.post = post
   post_stack.stack = stack
   post_stack.save!
+
+  faker_stack.each do |stack_name|
+    stack = Stack.find_or_create_by(name: stack_name)
+    post_stack = PostStack.new(post: post, stack: stack)
+    post_stack.save!
+  end
+
   i += 1
 end
 puts "seed ok"
