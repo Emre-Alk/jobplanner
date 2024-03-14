@@ -69,6 +69,7 @@ class PostsController < ApplicationController
       }
     )
   end
+
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
@@ -76,6 +77,15 @@ class PostsController < ApplicationController
     else
       # Handle error
     end
+  end
+
+  def sort
+    column = params[:column]
+    direction = params[:direction]
+
+    @posts = current_user.posts.order("#{column} #{direction}")
+
+    render json: { html_table: render_to_string(partial: "posts/tbody", locals: { posts: @posts }, formats: :html) }
   end
 
   private

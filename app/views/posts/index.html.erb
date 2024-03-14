@@ -4,22 +4,55 @@
   </div>
    <div class="rounded-3xl shadow-lg bg-white p-4">
     <div class="overflow-x-auto whitespace-nowrap">
-      <table class="divide-y divide-gray-300 w-full table-auto">
-      <thead>
-          <tr class="bg-gray-800">
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Poste</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Langage</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Entreprise</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Lieu</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Type de contrat</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Mise à jour</th>
-              <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">Statut</th>
-          </tr>
+      <table class="divide-y divide-gray-300 w-full table-auto" data-controller="sort-table">
+      <thead data-sort-table-target="thead">
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center" >
+              <span id="title" data-action="click->sort-table#sort" class="cursor-pointer">Title</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center">
+              <span id="stack">Stack</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center">
+              <span id="company">Company</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center">
+              <span data-action="click->sort-table#sort" id="location" class="cursor-pointer">Location</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center">
+              <span data-action="click->sort-table#sort" id="contract_type" class="cursor-pointer">Contract</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center">
+              <span data-action="click->sort-table#sort"  id="updated_at" class="cursor-pointer">Last Update</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+          <th scope="col" class="bg-white sticky top-0 px-3 py-3.5 text-left text-lg font-semibold text-gray-900">
+            <div class="flex items-center">
+              <span data-action="click->sort-table#sort" id="status" class="cursor-pointer">Status</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+            </div>
+          </th>
+        <tr class="bg-gray-800">
+        </tr>
       </thead>
-      <tbody data-tablepost-subscription-target="insert">
-        <% @posts.each do |post| %>
-          <%= render post %>
-        <% end %>
+      <tbody data-tablepost-subscription-target="insert" data-sort-table-target="tbody">
+        <%= render partial: 'tbody', locals: { posts: @posts } %>
       </tbody>
     </table>
     </div>
