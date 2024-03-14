@@ -94,6 +94,38 @@ stac = [
 "tailwindcss"
 ]
 
+
+
+chart = [
+  ["2024-03-07", 10],
+  ["2024-03-02", 20],
+  ["2024-03-03", 30],
+  ["2024-03-07", 10],
+  ["2024-03-05", 20],
+  ["2024-03-14", 30],
+  ["2024-03-07", 10],
+  ["2024-03-08", 0],
+  ["2024-03-09", 30],
+  ["2024-03-10", 10],
+  ["2024-03-11", 10],
+  ["2024-03-12", 30],
+  ["2024-03-01", 0],
+  ["2024-03-02", 20],
+  ["2024-03-03", 10],
+  ["2024-03-14", 10],
+  ["2024-03-05", 20],
+  ["2024-03-06", 10],
+  ["2024-03-07", 10],
+  ["2024-03-08", 0],
+  ["2024-03-09", 30],
+  ["2024-03-10", 10],
+  ["2024-03-13", 20],
+  ["2024-03-12", 30],
+  ["2024-03-10", 10],
+  ["2024-03-13", 20],
+  ["2024-03-13", 20],
+]
+
 user = User.create!(
   email: 'a@a.com',
   password: '123456',
@@ -102,12 +134,14 @@ user = User.create!(
 puts "#{user.email} - #{user.password} "
 
 i = 10
+j = 0
 
 25.times do
   faker_company = comp.shuffle!.pop
   faker_location = location.sample
   faker_title = job_titles.sample
-  faker_date = Faker::Date.between(from: 15.days.ago, to: Date.today)
+  #
+  faker_date = Date.strptime(chart[j][0], "%Y-%m-%d")
   faker_contract_type = contract_types.sample
   faker_stack = stac.sample(3)
   p faker_stack
@@ -123,7 +157,8 @@ i = 10
     url: "https://fr.indeed.com/?r=us&vjk=87aa6baacd5c5711&advn=12366446329411#{i}",
     description: "Une entreprise leader dans les solutions technologiques innovantes, recherche un Développeur Full Stack passionné et expérimenté pour rejoindre notre équipe dynamique. Si vous êtes motivé par les défis techniques et souhaitez contribuer à la création de produits révolutionnaires, ce poste est pour vous.",
     experience_years: rand(0..4).to_i,
-    status: [0, 10, 20, 30].sample.to_i,
+    # status: [0, 10, 20, 30].sample.to_i,
+    status: chart[j][1],
     updated_at: faker_date
   )
   post.user = user
@@ -145,5 +180,6 @@ i = 10
   end
 
   i += 1
+  j += 1
 end
 puts "seed ok"
