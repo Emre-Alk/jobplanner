@@ -93,7 +93,7 @@ stac = [
 "css3",
 "tailwindcss"
 ]
-r
+
 user = User.create!(
   email: 'a@a.com',
   password: '123456',
