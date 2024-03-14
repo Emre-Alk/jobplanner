@@ -3,23 +3,24 @@ class Post < ApplicationRecord
   has_many :post_stacks, dependent: :destroy
   has_many :stacks, through: :post_stacks
   belongs_to :user
+  # has_rich_text :content
 
   enum status: {
-    pending: 0,
-    applied: 10,
-    interviewed: 20,
-    rejected: 30
+    "en attente": 0,
+    candidaté: 10,
+    entretien: 20,
+    refusé: 30
   }
 
   def color
     case status
-    when "pending"
+    when "en attente"
       "#eab308"
-    when "applied"
+    when "candidaté"
       "#38a169"
-    when "interviewed"
+    when "entretien"
       "#94C1EA"
-    when "rejected"
+    when "refusé"
       "#e53e3e"
     end
   end
@@ -28,7 +29,7 @@ class Post < ApplicationRecord
     initializing: 0,
     ongoing: 10,
     failed: 20,
-    successful: 30,
+    successful: 30
   }
 
   validates :url, presence: true, uniqueness: true, on: :create

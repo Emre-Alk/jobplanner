@@ -17,7 +17,7 @@ export default class extends Controller {
     const data = {
       labels: sortedKeys,
       datasets: [{
-        label: 'Applied',
+        label: 'candidaté',
         data: sortedValues,
         fill: false,
         borderColor: '#38a169',

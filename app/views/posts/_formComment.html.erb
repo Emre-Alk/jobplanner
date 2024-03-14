@@ -1,0 +1,8 @@
+<%= form_with model: post, data: {
+                  comment_target: "dataForm",
+                  action: "submit->comment#update"
+                } do |f| %>
+    <%= f.label :comment %>
+    <%#= f.rich_text_area :comment %>
+    <%= f.submit class: "rounded border-1 bg-black text-white" %>
+<% end %>
