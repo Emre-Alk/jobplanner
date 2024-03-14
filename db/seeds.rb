@@ -1,13 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 require 'open-uri'
 require 'faker'
 PostStack.destroy_all
@@ -15,7 +5,6 @@ Post.destroy_all
 Company.destroy_all
 User.destroy_all
 Stack.destroy_all
-
 puts "Destroy all posts, users, stacks, companies"
 
 job_titles = [
@@ -104,7 +93,7 @@ stac = [
 "css3",
 "tailwindcss"
 ]
-
+r
 user = User.create!(
   email: 'a@a.com',
   password: '123456',
@@ -126,7 +115,6 @@ i = 10
   company = Company.new(name: faker_company)
   p company
   company.save!
-
   post = Post.new(
     title: faker_title,
     location: faker_location,
@@ -141,16 +129,13 @@ i = 10
   post.user = user
   post.company = company
   post.save!
-
   stack = Stack.new(
     name: faker_stack
   )
   stack.save!
-
   post_stack = PostStack.new
   post_stack.post = post
   post_stack.stack = stack
-
   post_stack.save!
 
   faker_stack.each do |stack_name|
@@ -161,5 +146,4 @@ i = 10
 
   i += 1
 end
-
 puts "seed ok"

@@ -28,8 +28,19 @@ export default class extends Controller {
     const chartOptions = {
       plugins: {
         legend: {
-          position: 'right' // This positions the legend at the bottom
+          position: 'right'
         }
+      },
+      scales: {
+        y: {
+            offset: true,
+            type: 'linear',
+            min: 0,
+            ticks: {
+              stepSize: 1,
+            },
+            beginAtZero: true
+        },
       },
       maintainAspectRatio: false,
       responsive: true,
