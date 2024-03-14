@@ -45,6 +45,9 @@ class PostsController < ApplicationController
         end
       end
       format.text do
+        puts "✅✅✅✅✅✅✅✅✅✅✅✅"
+        puts "#{form_params[:comment]}"
+        puts "✅✅✅✅✅✅✅✅✅✅✅✅"
         if @post.update(form_params)
           render partial: "posts/comment", locals: { post: @post }, formats: [:html]
         else

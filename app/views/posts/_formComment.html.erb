@@ -2,7 +2,8 @@
                   comment_target: "dataForm",
                   action: "submit->comment#update"
                 } do |f| %>
-    <%= f.label :comment %>
-    <%#= f.rich_text_area :comment %>
-    <%= f.submit class: "rounded border-1 bg-black text-white" %>
+      <!-- <%= f.label :comment %> -->
+      <%= f.rich_text_area :comment %>
+      <%= f.submit class: "inline-flex items-center mt-2 bg-gray-100 text-gray-800 rounded-md px-3 py-2 text-sm font-medium mb-4 transition duration-300 ease-in-out hover:bg-gray-400 hover:text-gray-900 text-gray-800 hover:bg-opacity-80 border border-neutral-800",
+                    value: "Enregistrer"%>
 <% end %>
