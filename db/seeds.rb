@@ -162,10 +162,10 @@ j = 0
   post.user = user
   post.company = company
   post.save!
-  stack = Stack.new(
-    name: faker_stack
-  )
-  stack.save!
+  # stack = Stack.new(
+  #   name: faker_stack
+  # )
+  # stack.save!
   post_stack = PostStack.new
   post_stack.post = post
   post_stack.stack = stack
