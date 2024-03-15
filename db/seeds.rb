@@ -166,10 +166,10 @@ j = 0
   #   name: faker_stack
   # )
   # stack.save!
-  post_stack = PostStack.new
-  post_stack.post = post
-  post_stack.stack = stack
-  post_stack.save!
+  # post_stack = PostStack.new
+  # post_stack.post = post
+  # post_stack.stack = stack
+  # post_stack.save!
 
   faker_stack.each do |stack_name|
     stack = Stack.find_or_create_by(name: stack_name)
