@@ -1,3 +1,4 @@
+<%= render partial: 'layouts/navbar' %>
 <div class="grid grid-cols-1 gap-y-16 mx-16" data-controller="tablepost-subscription" data-tablepost-subscription-user-id-value="<%= @user&.id %>">
   <div class="rounded-3xl shadow-lg bg-white" id="stats">
     <%= render partial: 'components/stats', locals: { posts_per_day: @posts_per_day, status_frequency: @status_frequency}%>

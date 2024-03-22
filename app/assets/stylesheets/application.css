@@ -42,7 +42,7 @@
 }
 
 .truncate-350 {
-  width: 350px;
+  width: 320px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -50,7 +50,7 @@
 }
 
 .truncate-200 {
-  width: 200px;
+  width: 170px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -58,7 +58,7 @@
 }
 
 .truncate-150 {
-  width: 150px;
+  width: 110px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
