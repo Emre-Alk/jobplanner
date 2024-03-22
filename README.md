@@ -1,24 +1,6 @@
-# README
+# Description
+Jobr est un dashboard qui permet de simplifier la recherche d'emploi et de suivre des candidatures depuis un seul endroit. Il est utilisable avec [l'extension chrome Jobr](https://github.com/Nojann/jobPlanner-ext-chrome/tree/master).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Ajouter une clef API OpenAI
+Pour utiliser l'application en local ajouter un ficher _.env_ à la racine de l'application et ajouter votre clef openAI sous la forme `OPENAI_ACCESS_TOKEN=sk-Fbm...5EB`
