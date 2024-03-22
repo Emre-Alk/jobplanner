@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  root to: "posts#index"
+
+  root to: "pages#home"
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

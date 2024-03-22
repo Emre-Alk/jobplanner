@@ -1,0 +1,59 @@
+<div class="relative">
+  <svg class="absolute z-0 -top-12 w-1/2 hidden md:block" viewBox="0 0 1445 1023" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="722.5" cy="511.5" rx="722.5" ry="511.5" fill="url(#paint0_radial_1_10)"/>
+    <defs>
+    <radialGradient id="paint0_radial_1_10" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(722.5 511.5) rotate(90) scale(511.5 722.5)">
+    <stop stop-color="#FFBA96"/>
+    <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    </defs>
+  </svg>
+
+  <svg class="absolute z-0 -right-24 top-32 w-1/2 hidden md:block" viewBox="0 0 744 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="372" cy="350" rx="372" ry="350" fill="url(#paint0_radial_1_11)"/>
+    <defs>
+    <radialGradient id="paint0_radial_1_11" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(372 350) rotate(90) scale(350 372)">
+    <stop stop-color="#FFBA96"/>
+    <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    </defs>
+  </svg>
+
+  <div class="mx-16 text-gray-700 font-medium absolute z-10">
+    <div class="justify-end gap-4 hidden md:flex">
+      <% if user_signed_in? %>
+        <%= link_to "DASHBOARD", posts_path %>
+      <% else %>
+        <%= link_to "SIGN-UP", new_user_registration_path %>
+        <%= link_to "LOG-IN", new_user_session_path %>
+      <% end %>
+    </div>
+    <div class="flex flex-col">
+      <h1 class="flex justify-center mb-4"><span class="lilita-one-regular text-5xl">JOBR</span></h1>
+      <p class="flex justify-center text-xl font-medium mb-4 md:hidden">L'application n'est pas disponible sur mobile pour le moment.</p>
+      <h2 class="md:flex justify-center text-xl font-medium mb-4 hidden">Simplifiez votre recherche d'emploi et suivez vos candidatures depuis un seul endroit.</h2>
+      <div class="flex justify-center">
+        <%= image_tag("Jobr_dashboard.png", alt: "Jobr dashboard", class: "w-2/3 shadow-lg hidden md:block") %>
+      </div>
+      <div class="my-4">
+        <p class="md:flex justify-center hidden">Gardez une trace de vos candidatures, des entretiens et des réponses des recruteurs facilement.</p>
+        <p class="md:flex justify-center hidden">Enregistrez en un clic une offre d’emploi grâce à l’extension chrome, l’IA sélectionne les données pertinentes pour vous.</p>
+      </div>
+      <div class="my-4">
+        <h2 class="flex justify-center text-xl font-medium mb-4">Une application open-source</h2>
+        <p class="flex justify-center">Conçu durant le bootcamp le Wagon à Lyon, le code source est entièrement disponible sur Github. Les contributions sont les bienvenues :</p>
+        <p class="flex justify-center">Vous pouvez nous faire remonter des bugs et des idées d'amélioration via les issues github ou le mail en contact. </p>
+        <p class="flex justify-center"> Il est aussi possible de développer de nouvelles features, corriger des bugs ou faire du code review. </p>
+        <div class="flex justify-center my-4 gap-8">
+          <a href="https://github.com/Emre-Alk/jobplanner" target="_blank"><button class="flex content-center gap-2 border border-gray-700 p-3 rounded-lg"><i class="text-3xl devicon-github-plain text-gray-700 "></i>Dashboard</button></a>
+          <a href="https://github.com/Nojann/jobPlanner-ext-chrome" target="_blank"><button class="flex content-center gap-2 border border-gray-700 p-3 rounded-lg"><i class="text-3xl devicon-github-plain text-gray-700 "></i>Extension</button></a>
+        </div>
+
+      </div>
+      <div class="my-4">
+        <h2 class="flex justify-center text-xl font-medium mb-4">Contact</h2>
+        <p class="flex justify-center">couret.robin[-at-]protonmail.com</p>
+      </div>
+    </div>
+  </div>
+</div>
